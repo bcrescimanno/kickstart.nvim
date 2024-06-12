@@ -257,14 +257,9 @@ rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-<<<<<<< HEAD
   -- NOTE: Plugins can be added via a link or github org/name. To run setup automatically, use `opts = {}`
   { 'NMAC427/guess-indent.nvim', opts = {} },
-=======
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'xiyaowong/transparent.nvim',
->>>>>>> 0ab7412 (adding transparency)
 
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
@@ -814,17 +809,10 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-<<<<<<< HEAD
-      vim.cmd.colorscheme 'tokyonight-night'
-=======
-      -- vim.cmd.colorscheme 'tokyonight-night'
-      vim.cmd.colorscheme {
-        'catppuccin-mocha',
-      }
+      vim.cmd.colorscheme { 'catppuccin-mocha', }
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
->>>>>>> 0ab7412 (adding transparency)
     end,
   },
 
