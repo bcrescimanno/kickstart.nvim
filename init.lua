@@ -223,6 +223,32 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
+-- Enable soft word-wrap for prose file types (markdown, Claude prompts)
+-- Uses visual-line navigation so j/k move by screen line, not file line
+local prose_augroup = vim.api.nvim_create_augroup('prose-wrap', { clear = true })
+local function enable_prose_wrap()
+  vim.opt_local.wrap = true
+  vim.opt_local.linebreak = true
+  vim.keymap.set('n', 'j', 'gj', { buffer = true, silent = true })
+  vim.keymap.set('n', 'k', 'gk', { buffer = true, silent = true })
+  vim.keymap.set('n', '0', 'g0', { buffer = true, silent = true })
+  vim.keymap.set('n', '$', 'g$', { buffer = true, silent = true })
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = prose_augroup,
+  pattern = 'markdown',
+  desc = 'Enable soft word-wrap for markdown files',
+  callback = enable_prose_wrap,
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = prose_augroup,
+  pattern = vim.fn.expand '~' .. '/.claude/**',
+  desc = 'Enable soft word-wrap for Claude prompt files',
+  callback = enable_prose_wrap,
+})
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.hl.on_yank()`
